@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BitCoinPriceTracker</string>
+    <string name="last_viewed_page">last_viewed_page</string>
+</resources>
