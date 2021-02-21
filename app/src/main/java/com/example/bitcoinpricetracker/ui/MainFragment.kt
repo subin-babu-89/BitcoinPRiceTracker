@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.bitcoinpricetracker.SUPPORTED_CURRENCIES
+import com.example.bitcoinpricetracker.util.SUPPORTED_CURRENCIES
 import com.example.bitcoinpricetracker.databinding.MainFragmentBinding
 import com.example.bitcoinpricetracker.network.BitcoinTrackerService
 import com.example.bitcoinpricetracker.ui.adapter.BitcoinViewPagerAdapter
 import com.example.bitcoinpricetracker.util.SharedPrefUtils
 import com.google.android.material.tabs.TabLayoutMediator
 
+/**
+ * Fragment hosting the view pager used to display currency details
+ */
 class MainFragment : Fragment() {
 
     private lateinit var binding: MainFragmentBinding
@@ -33,12 +36,13 @@ class MainFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        // bind timer with viewmodel initial time and start the chronometer
         binding.time.base = viewModel.initialTime
         binding.time.start()
 
         adapter = BitcoinViewPagerAdapter(this)
 
-        viewModel.currencyValues.observe(viewLifecycleOwner, {
+        viewModel.bitcoinTicker.observe(viewLifecycleOwner, {
             if (binding.bitcoinViewPager.adapter == null) {
                 binding.bitcoinViewPager.adapter = adapter
                 TabLayoutMediator(binding.tabs, binding.bitcoinViewPager) { tab, position ->
@@ -54,5 +58,4 @@ class MainFragment : Fragment() {
         super.onDetach()
         SharedPrefUtils.write(requireActivity(), binding.bitcoinViewPager.currentItem)
     }
-
 }

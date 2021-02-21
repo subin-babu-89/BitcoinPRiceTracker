@@ -2,6 +2,9 @@ package com.example.bitcoinpricetracker.model
 
 import com.squareup.moshi.Json
 
+/**
+ * Data class used as a model for the bitcoin ticker api
+ */
 data class BitcoinTicker(
     @Json(name = "USD")
     val uSD: CurrencyBitcoin,
@@ -73,6 +76,9 @@ data class BitcoinTicker(
     val tWD: CurrencyBitcoin
 
 ) {
+    /**
+     * Return map for all supported currencies from the recieved ticker response
+     */
     fun btcPrices(): Map<String, CurrencyBitcoin> {
         return mapOf(
             "USD" to uSD,
@@ -97,56 +103,6 @@ data class BitcoinTicker(
             "THB" to tHB,
             "TRY" to tRY,
             "TWD" to tWD
-        )
-    }
-
-    fun btcLatestPrices(): List<String> {
-        return listOf(
-            uSD.last.toString(),
-
-            aUD.last.toString(),
-
-            bRL.last.toString(),
-
-            cAD.last.toString(),
-
-            cHF.last.toString(),
-
-            cLP.last.toString(),
-
-            cNY.last.toString(),
-
-            dKK.last.toString(),
-
-            eUR.last.toString(),
-
-            gBP.last.toString(),
-
-            hKD.last.toString(),
-
-            iNR.last.toString(),
-
-            iSK.last.toString(),
-
-            jPY.last.toString(),
-
-            kRW.last.toString(),
-
-            nZD.last.toString(),
-
-            pLN.last.toString(),
-
-            rUB.last.toString(),
-
-            sEK.last.toString(),
-
-            sGD.last.toString(),
-
-            tHB.last.toString(),
-
-            tRY.last.toString(),
-
-            tWD.last.toString()
         )
     }
 }

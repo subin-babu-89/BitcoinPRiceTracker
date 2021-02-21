@@ -5,6 +5,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.bitcoinpricetracker.R
 
+/**
+ * Util method to read and write current pageindex to shared preferences
+ */
 class SharedPrefUtils {
     companion object {
         fun write(activity: Activity, pageIdx: Int) {

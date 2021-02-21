@@ -10,6 +10,9 @@ import com.example.bitcoinpricetracker.R
 import com.example.bitcoinpricetracker.databinding.BitcoinViewpagerPageFragmentBinding
 import com.example.bitcoinpricetracker.network.BitcoinTrackerService
 
+/**
+ * Fragment page for view pager. Displays supported currency details
+ */
 class BitcoinViewPagerPageFragment : Fragment() {
     companion object {
         const val ARG_OBJECT = "object"

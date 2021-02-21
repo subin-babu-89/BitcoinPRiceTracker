@@ -9,6 +9,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
+/**
+ * Network interface to fetch the latest blockchain prices from the server
+ */
 interface BitcoinTrackerService {
     companion object {
         private const val BASE_URL = "https://blockchain.info/"
@@ -17,7 +20,6 @@ interface BitcoinTrackerService {
             val logger = HttpLoggingInterceptor()
             logger.level = HttpLoggingInterceptor.Level.BASIC
             val okHttpClient = OkHttpClient.Builder().addInterceptor(logger).build()
-
             val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
             return Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient).addConverterFactory(

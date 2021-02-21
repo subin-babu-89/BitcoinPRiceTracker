@@ -1,5 +1,8 @@
-package com.example.bitcoinpricetracker
+package com.example.bitcoinpricetracker.util
 
+/**
+ * List of supported currencies in the application
+ */
 val SUPPORTED_CURRENCIES = listOf(
         "USD",
         "AUD",
