@@ -5,15 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.bitcoinpricetracker.SUPPORTED_CURRENCIES
-import com.example.bitcoinpricetracker.network.BitcoinTrackerService
 import com.example.bitcoinpricetracker.databinding.MainFragmentBinding
+import com.example.bitcoinpricetracker.network.BitcoinTrackerService
 import com.example.bitcoinpricetracker.ui.adapter.BitcoinViewPagerAdapter
 import com.example.bitcoinpricetracker.util.SharedPrefUtils
 import com.google.android.material.tabs.TabLayoutMediator
-import timber.log.Timber
 
 class MainFragment : Fragment() {
 
@@ -34,12 +32,14 @@ class MainFragment : Fragment() {
         binding = MainFragmentBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.time.base = viewModel.startTime
-        binding.time.start()
-        adapter = BitcoinViewPagerAdapter(this)
-        viewModel.currencyValues.observe(viewLifecycleOwner, Observer {
 
-            if (binding.bitcoinViewPager.adapter == null){
+        binding.time.base = viewModel.initialTime
+        binding.time.start()
+
+        adapter = BitcoinViewPagerAdapter(this)
+
+        viewModel.currencyValues.observe(viewLifecycleOwner, {
+            if (binding.bitcoinViewPager.adapter == null) {
                 binding.bitcoinViewPager.adapter = adapter
                 TabLayoutMediator(binding.tabs, binding.bitcoinViewPager) { tab, position ->
                     tab.text = SUPPORTED_CURRENCIES[position]

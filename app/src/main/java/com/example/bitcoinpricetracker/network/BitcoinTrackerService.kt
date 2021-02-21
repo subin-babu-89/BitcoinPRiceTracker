@@ -9,11 +9,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
-interface BitcoinTrackerService{
-    companion object{
-        const val BASE_URL = "https://blockchain.info/"
+interface BitcoinTrackerService {
+    companion object {
+        private const val BASE_URL = "https://blockchain.info/"
 
-        fun create() : BitcoinTrackerService {
+        fun create(): BitcoinTrackerService {
             val logger = HttpLoggingInterceptor()
             logger.level = HttpLoggingInterceptor.Level.BASIC
             val okHttpClient = OkHttpClient.Builder().addInterceptor(logger).build()
@@ -27,5 +27,5 @@ interface BitcoinTrackerService{
     }
 
     @GET("ticker")
-    suspend fun getBitcoinTicker() : BitcoinTicker
+    suspend fun getBitcoinTicker(): BitcoinTicker
 }

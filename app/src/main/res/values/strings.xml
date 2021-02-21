@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">BitCoinPriceTracker</string>
     <string name="last_viewed_page">last_viewed_page</string>
+
+    <string name="last">last : %s %s </string>
+    <string name="_15m">15 min : %s %s </string>
+    <string name="buy">buy : %s %s </string>
+    <string name="sell">sell : %s %s </string>
 </resources>

@@ -100,7 +100,7 @@ data class BitcoinTicker(
         )
     }
 
-    fun btcLatestPrices() : List<String>{
+    fun btcLatestPrices(): List<String> {
         return listOf(
             uSD.last.toString(),
 

@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.bitcoinpricetracker.R
 import com.example.bitcoinpricetracker.databinding.BitcoinViewpagerPageFragmentBinding
 import com.example.bitcoinpricetracker.network.BitcoinTrackerService
 
@@ -48,8 +48,20 @@ class BitcoinViewPagerPageFragment : Fragment() {
         binding = BitcoinViewpagerPageFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.bitcoinTicker.observe(viewLifecycleOwner, Observer {
-            binding.textView.text = it.btcPrices()[btcValue]?.last.toString()
+        viewModel.bitcoinTicker.observe(viewLifecycleOwner, { btcTicker ->
+            val currentCurrency = btcTicker.btcPrices()[btcValue]
+            (currentCurrency?.last?.toBigDecimal()?.toPlainString()).also {
+                binding.lastTextView.text = getString(R.string.last, it, currentCurrency?.symbol)
+            }
+            (currentCurrency?._15m?.toBigDecimal()?.toPlainString()).also {
+                binding.m15TextView.text = getString(R.string._15m, it, currentCurrency?.symbol)
+            }
+            (currentCurrency?.buy?.toBigDecimal()?.toPlainString()).also {
+                binding.buyTextView.text = getString(R.string.buy, it, currentCurrency?.symbol)
+            }
+            (currentCurrency?.sell?.toBigDecimal()?.toPlainString()).also {
+                binding.sellTextView.text = getString(R.string.sell, it, currentCurrency?.symbol)
+            }
         })
 
         return binding.root
