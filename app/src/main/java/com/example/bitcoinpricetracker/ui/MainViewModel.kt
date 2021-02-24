@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.example.bitcoinpricetracker.model.BitcoinTicker
 import com.example.bitcoinpricetracker.network.BitcoinTrackerService
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.*
 private const val ONE_SECOND: Long = 1000
 
@@ -38,8 +39,12 @@ class MainViewModel(private val btcService: BitcoinTrackerService) : ViewModel()
      */
     fun getLatestBTCPrice() {
         viewModelScope.launch {
-            val bitcoinTicker = btcService.getBitcoinTicker()
-            _bitcoinTicker.value = bitcoinTicker
+            try{
+                val bitcoinTicker = btcService.getBitcoinTicker()
+                _bitcoinTicker.value = bitcoinTicker
+            }catch (exception : Exception){
+                Timber.d("Error occured : $exception")
+            }
         }
     }
 
